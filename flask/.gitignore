@@ -1,0 +1,6 @@
+.vercel
+venv
+.env.local
+.env
+api/.env.local
+api/__pycache__

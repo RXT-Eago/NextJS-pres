@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: "Poppins";
+}
+
+h1 {
+  font-family: "Dancing Script";
+}
+
+input[type="file"] {
+  display: none;
+}

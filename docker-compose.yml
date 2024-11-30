@@ -1,0 +1,34 @@
+
+services:
+  front-end:
+    environment:
+      - DEBUG_MODE={DEBUG_MODE}
+    build:
+      context: ./next/recette
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./next/recette:/app
+    command: npm run dev
+    depends_on:
+      - back-end
+    networks:
+      - default
+      
+  back-end:
+    environment:
+      - ANON_KEY={ANON_KEY}
+      - DATABASE_URL={DATABASE_URL}
+    build:
+      context: ./flask
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./flask:/app
+    command: flask --app ./api/index run --host=0.0.0.0 --port=5000
+    networks:
+      - default
+
+networks:
+  default:
+      name: NextJsPresentation
