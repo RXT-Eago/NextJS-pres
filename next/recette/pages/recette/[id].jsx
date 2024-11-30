@@ -229,15 +229,11 @@ export async function getStaticProps({ params }) {
     const id = params.id
     console.log(id);
 
-    let URL = "http://127.0.0.1:5000/recette?id=" + id;
+    let URL = "http://back-end:5000/blog?id=" + id;
 
     if (process.env.DEBUG_MODE === 'false') {
-        URL = "https://api-recette-zouzou.vercel.app/recette?id=" + id;
+        URL = "https://production-url-unavailable" + id;
     }
-
-    
-
-    
 
     const res = await fetch(URL);
     const recipe = await res.json();

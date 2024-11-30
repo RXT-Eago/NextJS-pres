@@ -2,7 +2,7 @@
 services:
   front-end:
     environment:
-      - DEBUG_MODE={DEBUG_MODE}
+      - DEBUG_MODE=true
     build:
       context: ./next/recette
     ports:
@@ -12,20 +12,22 @@ services:
     command: npm run dev
     depends_on:
       - back-end
+    links:
+      - back-end
     networks:
       - default
-      
+
   back-end:
     environment:
-      - ANON_KEY={ANON_KEY}
-      - DATABASE_URL={DATABASE_URL}
+      - ANON_KEY=${ANON_KEY_NEXTJS}
+      - DATABASE_URL=${DATABASE_URL_NEXTJS}
     build:
       context: ./flask
     ports:
       - "5000:5000"
     volumes:
       - ./flask:/app
-    command: flask --app ./api/index run --host=0.0.0.0 --port=5000
+    command: flask --app ./api/index run --debug --host=0.0.0.0
     networks:
       - default
 

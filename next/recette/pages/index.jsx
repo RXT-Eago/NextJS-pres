@@ -83,8 +83,8 @@ export default function Home({recipes, debugMode}) {
   function handleDelete(id) {
     console.log("debug mode is ", debugMode);
     const url = debugMode 
-    ? "http://127.0.0.1:5000/deleteRecipe" 
-    : "https://api-recette-zouzou.vercel.app/deleteRecipe";
+    ? "http://back-end:5000/deleteBlog" 
+    : "https://production-url-unavailable";
 
     fetch(url + `?id=${id}`, {
       method: 'GET', // or 'PUT'
@@ -238,21 +238,19 @@ export default function Home({recipes, debugMode}) {
 
 export async function getServerSideProps() {
 
-  let URL = "http://127.0.0.1:5000/recipes";
+  let URL = "http://back-end:5000/blogs";
+  console.log(process.env.DEBUG_MODE);
   if(process.env.DEBUG_MODE === 'false'){
-    URL = "https://api-recette-zouzou.vercel.app/recipes";
+    URL = "https://production-url-unavailable";
   }
   console.log(URL);
   const res = await fetch(URL);
   const recipes = await res.json();
-  //console.log(recipes);
 
   recipes.forEach((recipe, index) => {
     recipe.image = `data:image/jpeg;base64,${recipe.image}`;
   }
   )
-
-  //console.log(recipes[1].ingredients);
 
 
   return {

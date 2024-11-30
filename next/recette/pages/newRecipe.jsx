@@ -70,8 +70,8 @@ export default function NewRecipe() {
     setIsWaiting(true);
 
     const url = debugMode 
-    ? "http://127.0.0.1:5000/addRecipe" 
-    : "https://api-recette-zouzou.vercel.app/addRecipe";
+    ? "http://back-end:5000/addRecipe" 
+    : "https://production-url-unavailable";
 
 
     console.log(url);
