@@ -8,21 +8,12 @@ import Link from "next/link";
 export default function NavBar() {
   return (
     <>
-    <div className=" fixed bottom-0 z-30  h-16 flex w-full  bg-[#AC8778] ">
+    <div className=" fixed bottom-0 right-2 z-30  h-16 flex w-full justify-end items-center   ">
 
-     
-        <div className="flex w-full text-2xl text-white ">
-            <h1 className="w-1/2 py-2 flex justify-center items-center justify-items-center ">
-                Articles
-            </h1>
-            <div className="w-[2px] h-full bg-black"></div>
-            <h1 className="w-1/2 py-2 flex justify-center items-center justify-items-center ">
-            <Link className=""
+        <Link className="w-12 h-12 shadow-[rgba(0,0,15,0.5)_3px_3px_4px_0px] shadow-md flex justify-center justify-items-center items-center rounded-full bg-primary text-2xl text-white "
                 href="/newRecipe">
-                Nouvelle Recette
-            </Link>
-            </h1>
-        </div>        
+                +
+        </Link>        
      
 
     </div>

@@ -158,7 +158,7 @@ export default function Home({ recipe }) {
                         </div>
     
                         <div className="w-full p-1 ">
-                            {recipe && recipe.etapes && recipe.etapes.map((etape, index) => (
+                            {recipe && recipe.hashtag && recipe.hashtag.map((etape, index) => (
     
                                 <div key={index} className="w-full ">
                                     {

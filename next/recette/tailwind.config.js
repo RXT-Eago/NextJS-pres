@@ -10,6 +10,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      colors: {
+        primary: '#FFC0CB',
+      },
       keyframes: {
         swipeIn: {
           '0%': { transform: 'translateX(100%)' },

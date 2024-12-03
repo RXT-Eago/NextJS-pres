@@ -16,7 +16,7 @@ export default function SearchBar({searchText, setSearchText}) {
         </div>
      
         <div className="w-1/6 flex justify-items-center items-center justify-end">
-            <button className="bg-black rounded-full p-2">
+            <button className="bg-primary rounded-full p-2 shadow-[rgba(0,0,15,0.5)_3px_3px_4px_0px] shadow-sm">
                 <img src="/assets/images/search.svg" className="w-5 h-5" alt="search" />
             </button>
         </div>

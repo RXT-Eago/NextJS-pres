@@ -7,9 +7,7 @@ import styles from "@/styles/Home.module.css";
 export default function NavBar() {
   return (
     <>
-    <div className="  h-16 flex w-full py-2 bg-[#AC8778] ">
-
-     
+    <div className="  h-16 flex w-full py-2 bg-primary ">
         <div className="flex justify-items-center items-center justify-center w-full ">
             <h1 className="text-4xl text-white font-thin italic ">
                 FreeFodMap Bakery

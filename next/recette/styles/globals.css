@@ -13,3 +13,22 @@ h1 {
 input[type="file"] {
   display: none;
 }
+
+.wrapper {
+  width: 100%;
+  height: auto;
+  padding: 2rem;
+  margin: 4rem 0;
+  display: flex;
+  justify-content: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: #f8b4b4;
+  border-radius: 1rem;
+  grid-column: span 2/ span 2;
+
+}
+
+.wrapper:hover > :not(:hover) {
+  filter: blur(2px);
+  opacity: 50%;
+}

@@ -111,7 +111,6 @@ def addRecipe():
         try:
         
             SupabaseClient = create_client(DATABASE_URL, ANON_KEY)       
-
         
             response = SupabaseClient.table('Blog').insert(
                 {'name': json_object['name'], 'description': json_object['description'], 'image': json_object['image'], 'hashtag': json_object['hashtags']}
@@ -126,9 +125,6 @@ def addRecipe():
         except Exception as e:
             print(e)
             return str(e)
-        
-        
-        
 
     else:
         return 'Only POST requests are allowed'

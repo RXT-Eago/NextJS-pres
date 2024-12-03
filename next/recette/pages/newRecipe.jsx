@@ -11,7 +11,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 
 
-export default function NewRecipe() {
+export default function NewBlog() {
 
 
   const [Nom , setNom] = useState("");
@@ -69,9 +69,7 @@ export default function NewRecipe() {
 
     setIsWaiting(true);
 
-    const url = debugMode 
-    ? "http://back-end:5000/addRecipe" 
-    : "https://production-url-unavailable";
+    const url = "http://localhost:5000/addBlog"
 
 
     console.log(url);
@@ -82,7 +80,6 @@ export default function NewRecipe() {
       method: 'POST', // or 'PUT'
       mode: 'no-cors',
       headers: {
-        
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(data),
@@ -91,7 +88,11 @@ export default function NewRecipe() {
     .then(data => {
       setIsWaiting(false);
       window.location.href = "/";
-    })
+    }).catch((error) => {
+      setIsWaiting(false);
+      console.error('Error:', error);
+    }
+    );
 
   }
 
@@ -100,18 +101,15 @@ export default function NewRecipe() {
   function SubmitRecipe(){
     // convert image to base64 string
     const base64image = Image ? URL.createObjectURL(Image) : null;
-    //console.log(base64image);
+    console.log(base64image);
     
-    toDataURL(base64image, function(dataUrl) {
-
-
-      
+    toDataURL(base64image, function(dataUrl) {      
       const Recipe = {
         "name" : Nom,
         "ingredients" : Ingredients,
         "description" : Description,
         "nb_personnes" : NbPersonnes,
-        "etapes" : Etapes,
+        "hashtags" : Etapes,
         "image" : dataUrl.split(",")[1]
         
       }
@@ -140,7 +138,7 @@ export default function NewRecipe() {
       
        {
         OpenIngredientModal ? (
-          <div className="fixed z-20 top-0 left-0 w-screen h-screen bg-black bg-opacity-50 flex justify-center items-center">
+          <div className="fixed sm:px-[20%] z-20 top-0 left-0 w-screen h-screen bg-black bg-opacity-50 flex justify-center items-center">
             <div className="w-4/5 h-1/2 relative bg-white rounded-xl shadow-lg p-4 flex justify-center justify-items-center items-center">
               
               <div className="absolute top-2 right-4 w-9 h-9 flex justify-center items-center justify-items-center">
@@ -203,7 +201,7 @@ export default function NewRecipe() {
 
      <div className="fixed z-0 bottom-0 left-0 w-screen h-16  p-2 mt-5">
         <div className="w-full h-full flex justify-center items-center justify-items-center">
-          <button className="w-1/2 rounded-3xl h-full bg-[#AC8778] text-white text-xl font-extralight"
+          <button className="w-1/2 rounded-3xl h-full bg-primary text-white text-xl font-extralight"
           onClick={() => SubmitRecipe()}>
             Créer la recette
           </button>
@@ -214,7 +212,7 @@ export default function NewRecipe() {
       <Header />
       <NavBar />
 
-      <div className="w-full h-[calc(100vh-8rem)]  overflow-y-auto">
+      <div className="w-full h-[calc(100vh-8rem)] sm:px-[20%]  overflow-y-auto">
 
      
 

@@ -14,6 +14,7 @@ import { useEffect } from "react";
 
 
 export default function Home({recipes, debugMode}) {
+  
 
   console.log("debug mode is ", debugMode);
 
@@ -83,7 +84,7 @@ export default function Home({recipes, debugMode}) {
   function handleDelete(id) {
     console.log("debug mode is ", debugMode);
     const url = debugMode 
-    ? "http://back-end:5000/deleteBlog" 
+    ? "http://localhost:5000/deleteBlog" 
     : "https://production-url-unavailable";
 
     fetch(url + `?id=${id}`, {
@@ -95,7 +96,7 @@ export default function Home({recipes, debugMode}) {
       
       .then((data) => {
         console.log("data", data);
-        recipes = recipes.filter((recipe) => recipe.id !== id);
+        recipes.filter(recipe => recipe.id !== id);
       })
       .catch((error) => {
         console.error('Error:', error);
@@ -121,7 +122,7 @@ export default function Home({recipes, debugMode}) {
       <div id="mainRecetteDisplay" className="w-full h-auto mt-3 px-3 py-4 gap-4 grid grid-cols-2 grid-flow-row mb-16">
 
         {recipes.map((recipe, index) => (
-          <Link key={index} className="w-full relative h-auto p-2 my-4  flex justify-center shadow-md  rounded-lg col-span-2 md:col-span-1 "
+          <Link key={index}  className="w-full relative h-auto p-2 my-4  flex justify-center shadow-lg bg-primary  rounded-lg col-span-2 md:col-span-1 "
             onTouchStart={onTouchStart} onTouchMove={onTouchMove} onTouchEnd={onTouchEnd( recipe.id)}
             
             href={`/recette/${recipe.id}`} >
