@@ -11,7 +11,10 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: '#FFC0CB',
+        primary: '#46DBC4',
+        secondary: '#1E1E1E',
+        primaryText: '#E0E0E0',
+        backrgound: '#121212',
       },
       keyframes: {
         swipeIn: {

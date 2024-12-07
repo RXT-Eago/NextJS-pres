@@ -1,6 +1,7 @@
 import base64
 import json
 import os
+import traceback
 from flask import Flask, current_app
 from flask import request
 import requests
@@ -36,6 +37,8 @@ def get_blogs():
         
         response = SupabaseClient.table('Blog').select('*').execute()
         blogs = response.data
+
+        logger.info(f"blogs: {blogs}")
 
         if len(blogs) == 0:
             return []
@@ -85,35 +88,25 @@ def addRecipe():
 
         """
         {
-            "name": "Poulet aux champignons",
-            "description": "Une recette de poulet aux champignons",
+            "name": "Les meilleurs KPI",
+            "description": "Long text de plus de 1000 caractères",
             "image": "https://www.google.com",
-            "etapes": ["manger", "boire"],
-            "nb_personnes": "4",
-            "ingredients": [
-                {
-                    "name": "Poulet",
-                    "quantite": "2",
-                    "unite": "kg"
-                },
-                {
-                    "name": "Champignons",
-                    "quantite": "500",
-                    "unite": "g"
-                }
+            "hastags": ["#poulet", "#champignons"],
+            "auteur": "Zouzou",
             ]
         }
         """
 
-        
         json_object = json.loads(dictionnary)
+
+        logger.info(f"json_object: {json_object}")
 
         try:
         
             SupabaseClient = create_client(DATABASE_URL, ANON_KEY)       
         
             response = SupabaseClient.table('Blog').insert(
-                {'name': json_object['name'], 'description': json_object['description'], 'image': json_object['image'], 'hashtag': json_object['hashtags']}
+                {'name': json_object['name'], 'description': json_object['description'], 'image': json_object['image'], 'hashtag': json_object['hashtags'], 'auteur': json_object['auteur']}
             ).execute()
             response = response.data
             blog_id = response[0]['id']
@@ -123,7 +116,7 @@ def addRecipe():
             return "Recette ajoutée avec succès"
         
         except Exception as e:
-            print(e)
+            logger.error(f"Error: {e} and {traceback.format_exc()}")
             return str(e)
 
     else:

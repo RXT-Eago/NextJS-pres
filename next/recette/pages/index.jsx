@@ -108,7 +108,7 @@ export default function Home({recipes, debugMode}) {
   
 
   return (
-    <div className="w-screen h-auto">
+    <div className="w-screen h-screen">
       <Header />
       <NavBar />
       < BottomBar />
@@ -117,32 +117,29 @@ export default function Home({recipes, debugMode}) {
 
       < SearchBar searchText={searchText} setSearchText={setSearchText} />
 
-      <hr className="w-full mt-2 h-0.5 bg-black opacity-20" />
 
-      <div id="mainRecetteDisplay" className="w-full h-auto mt-3 px-3 py-4 gap-4 grid grid-cols-2 grid-flow-row mb-16">
+      <div id="mainRecetteDisplay" className="w-full bg-backrgound h-[calc(100vh-134px)] 3 px-3 py-4 gap-4 grid grid-cols-4 grid-flow-row">
 
         {recipes.map((recipe, index) => (
-          <Link key={index}  className="w-full relative h-auto p-2 my-4  flex justify-center shadow-lg bg-primary  rounded-lg col-span-2 md:col-span-1 "
+          <Link key={index}  className="w-full relative h-56 p-2 my-4  flex justify-center bg-secondary rounded-lg col-span-4 sm:col-span-2 md:col-span-1 border-2 border-primary shadow-primaryText overflow-hidden hover:shadow-lg transition-shadow duration-500"
             onTouchStart={onTouchStart} onTouchMove={onTouchMove} onTouchEnd={onTouchEnd( recipe.id)}
             
             href={`/recette/${recipe.id}`} >
 
-            
 
-            {
-              index % 2 === 0 ? (
-                <>
-                  <div className="w-1/2 aspect-square p-5">
-                    <img id={index} className="w-full aspect-square  shadow-xl rounded-xl" alt="crepes" />
-                  </div>
+                <img
+                  id={index}
+                  className="absolute top-0 left-0 w-full h-full object-cover grayscale opacity-5 rounded-lg hover:scale-150 transition-transform duration-500"
+                  alt={recipe.name}
+                />
 
-                  <div className="h-full w-1/2 py-3 px-5 md:px-3 text-end">
-                    <div className="h-2/3">
+                  <div className="h-full w-full py-3 px-5 md:px-3 text-primaryText">
+                    <div className="h-4/6">
                       <div className="text-2xl font-light">
                         {recipe.name}
                       </div>
                       <div className="text-xs font-light italic">
-                        {recipe.description}
+                        {recipe.description && recipe.description.length > 100 ? recipe.description.slice(0, 100) + "..." : recipe.description}
                       </div>
                     </div>
                     {
@@ -164,65 +161,23 @@ export default function Home({recipes, debugMode}) {
                     }
 
                     {/*Bottom left*/}
-                    <div className="h-1/3 flex justify-items-center items-end justify-start">
+                    <div className="h-1/6 flex justify-items-center items-end justify-start">
+                      <div className="text-xs text-primaryText italic font-thin">
+                        Ecrit par <span className="font-normal">{recipe.auteur}</span>
+                      </div>
+                    </div>
+                    <div className="h-1/6 flex justify-items-center items-end justify-start">
 
-                      <div className="text-[10px]  font-light flex">
+                      <div className="text-[10px] text-primaryText italic font-thin">
                         {// for all recipe.ingredients print map of all names
-                          recipe.ingredients && recipe.ingredients.map((ingredient, index) => ingredient.name).join(', ')
+                          recipe.hashtag && recipe.hashtag.map((hashtag, index) => {
+                            return "#" + hashtag
+                          }
+                          ).join(', ')
                         }
                       </div>
                     </div>
-                  </div>
-                </>
-              ) : <>
-
-                  <div className="h-full w-1/2 py-3 px-5 md:px-3 ">
-                    <div className="h-2/3">
-                      <div className="text-2xl font-light">
-                        {recipe.name}
-                      </div>
-                      <div className="text-xs font-light italic">
-                        {recipe.description}
-                      </div>
-                    </div>
-
-                    {
-                      // when the recipe is swiped the div must appear from the right side
-                      swipeRecipe[index] && swipeRecipe[index].isSwiped ? (
-                        <div className="absolute z-30 top-0 right-0 rounded-r-lg h-full w-1/2 bg-blue-500 flex ">
-                          
-                          <button className="bg-red-300 w-1/2 flex justify-center items-center justify-items-center"
-                            onClick={(e) => {
-                              e.preventDefault();
-                              handleDelete(recipe.id)}}>
-                            <div className="text-white font-bold text-xs">Supprimer</div>
-                          </button>
-                          <div className="bg-[#AC8778] rounded-r-lg w-1/2 flex justify-center items-center justify-items-center">
-                            <div className="text-white font-bold text-xs">Modifier</div>
-                          </div>
-                        </div>
-                      ) : null
-                    }
-
-                    {/*Bottom left*/}
-                    <div className="h-1/3 flex justify-items-center items-end justify-start">
-
-                      <div className="text-[10px]  font-light flex">
-                        {// for all recipe.ingredients print map of all names
-                          recipe.ingredients && recipe.ingredients.map((ingredient, index) => ingredient.name).join(', ')
-                        }
-                      </div>
-                    </div>
-                  </div>
-
-
-                  <div className="w-1/2 aspect-square p-5">
-                    <img id={index} className="w-full aspect-square shadow-xl rounded-xl" alt="crepes" />
-                  </div>
-
-              
-            </>
-            }
+                  </div>             
 
             
 

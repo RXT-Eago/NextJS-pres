@@ -15,6 +15,7 @@ export default function NewBlog() {
 
 
   const [Nom , setNom] = useState("");
+  const [Auteur , setAuteur] = useState("");
   const [Description , setDescription] = useState("");
   const [NbPersonnes , setNbPersonnes] = useState(2);
   const [Ingredients , setIngredients] = useState([]);
@@ -37,17 +38,6 @@ export default function NewBlog() {
       setNbPersonnes(NbPersonnes-1);
 
     }
-  }
-
-  function addIngredient(){
-    const IngredientFormat = {
-      "name": currentIngredient,
-      "quantite": currentQuantite,
-      "unite": currentType
-    }
-    console.log(IngredientFormat);
-    setIngredients([...Ingredients, IngredientFormat]);
-    setOpenIngredientModal(false);
   }
 
   function toDataURL(url, callback) {
@@ -106,9 +96,8 @@ export default function NewBlog() {
     toDataURL(base64image, function(dataUrl) {      
       const Recipe = {
         "name" : Nom,
-        "ingredients" : Ingredients,
+        "auteur" : Auteur,
         "description" : Description,
-        "nb_personnes" : NbPersonnes,
         "hashtags" : Etapes,
         "image" : dataUrl.split(",")[1]
         
@@ -117,10 +106,7 @@ export default function NewBlog() {
       PostRecipe (Recipe);
     }
     )
-
-    
-    
-    
+  
   }
 
   return (
@@ -135,75 +121,14 @@ export default function NewBlog() {
           </div>
         ) : null
        } 
-      
-       {
-        OpenIngredientModal ? (
-          <div className="fixed sm:px-[20%] z-20 top-0 left-0 w-screen h-screen bg-black bg-opacity-50 flex justify-center items-center">
-            <div className="w-4/5 h-1/2 relative bg-white rounded-xl shadow-lg p-4 flex justify-center justify-items-center items-center">
-              
-              <div className="absolute top-2 right-4 w-9 h-9 flex justify-center items-center justify-items-center">
-                <button className="bg-slate-300 border-2 w-full h-full text-sm rounded-full shadow-sm"
-                onClick={() => setOpenIngredientModal(false)}>
-                  X
-                </button>
-              </div>
+    
+    <div className="w-screen h-auto">
 
-              <div className="w-full h-2/3">
-              <h1>
-                Ajouter un ingrédient
-              </h1>
-              <div className="w-full px-2">
-                <hr className="w-full h-0.5 bg-slate-300 " />
-              </div>
-
-              <div className="w-full p-2 ">
-                <input className="w-full border-2 text-sm rounded-xl shadow-sm p-2" type="text"
-                onChange={(e) => setCurrentIngredient(e.target.value)} />
-              </div>
-
-              <h1>
-                Quantité
-              </h1>
-              <div className="w-full px-2">
-                <hr className="w-full h-0.5 bg-slate-300 " />
-              </div>
-
-              <div className="w-full p-2 flex gap-x-1">
-                <input className="w-1/2 border-2 text-sm rounded-xl shadow-sm p-2" type="text"
-                onChange={(e) => setCurrentQuantite(e.target.value)} />
-
-                <select className="w-1/2 border-2 text-sm rounded-xl shadow-sm p-2"
-                value={currentType}
-                onChange={(e) => setCurrentType(e.target.value)}>
-                  <option>g</option>
-                  <option>mg</option>
-                  <option>cl</option>
-                  <option>ml</option>
-                  <option>L</option>
-                  <option>cuillère à café</option>
-                  <option>cuillère à soupe</option>
-                  <option>unité</option>
-                </select>
-              </div>
-
-              <div className="w-full p-2 ">
-                <button className="w-full bg-slate-300 border-2 text-sm  rounded-xl shadow-sm p-3"
-                onClick={() => addIngredient()}>
-                  Ajouter
-                </button>
-              </div>
-            </div>
-            </div>
-          </div>
-        ) : null
-      }
-    <div className="w-screen h-auto" style={{filter: OpenIngredientModal || isWaiting ? "blur(5px)" : "none"}}>
-
-     <div className="fixed z-0 bottom-0 left-0 w-screen h-16  p-2 mt-5">
+     <div className="fixed z-0 bottom-0 left-0 w-screen h-16  p-2 bg-backrgound">
         <div className="w-full h-full flex justify-center items-center justify-items-center">
-          <button className="w-1/2 rounded-3xl h-full bg-primary text-white text-xl font-extralight"
+          <button className="w-1/2 rounded-3xl h-full bg-primary text-white text-xl font-light"
           onClick={() => SubmitRecipe()}>
-            Créer la recette
+            Créer le post
           </button>
         </div>
     </div>
@@ -212,30 +137,48 @@ export default function NewBlog() {
       <Header />
       <NavBar />
 
-      <div className="w-full h-[calc(100vh-8rem)] sm:px-[20%]  overflow-y-auto">
+      <div className="absolute -z-10 w-full h-[calc(100vh-132px)] bg-backrgound  flex justify-center items-center justify-items-center">
+      </div>
+
+      <div className="w-full h-[calc(100vh-132px)]  sm:px-[20%]  overflow-y-auto">
 
      
 
-      <div className="h-atuo text-lg text-center w-full my-4 font-thin relative">
-        Créer une nouvelle recette
-          <Link className="absolute top-0 left-0 h-10 w-10 text-black font-bold text-2xl  z-10"
-            href="/">
-            {"<-"}
-           </Link>
+      <div className="h-auto text-lg text-center w-full my-4 text-primary relative">
+        Créer un nouveau post
       </div>
 
 
       <div id="NomRecette" className="w-full h-auto py-1 px-6">
         
         <h1>
-          Nom de la recette
+          Nom de l'article
         </h1>
         <div className="w-full ">
             <hr className="w-full h-0.5 bg-slate-300 " />
         </div>
         <div className="w-full p-2 ">
-          <input className="w-full border-2 text-sm rounded-xl shadow-sm p-2" type="text"
+          <input className="w-full border-2 text-sm rounded-xl text-primaryText shadow-sm p-2 border-primary bg-secondary"
+          type="text"
+          placeholder="Saissisez le nom de l'article"
           onChange={(e) => setNom(e.target.value)} />
+        </div>
+        
+      </div>
+
+      <div id="auteur" className="w-full h-auto py-1 px-6">
+        
+        <h1>
+          Auteur
+        </h1>
+        <div className="w-full ">
+            <hr className="w-full h-0.5 bg-slate-300 " />
+        </div>
+        <div className="w-full p-2 ">
+          <input className="w-full border-2 text-sm rounded-xl text-primaryText shadow-sm p-2 border-primary bg-secondary"
+          type="text"
+          placeholder="Saissisez votre nom"
+          onChange={(e) => setAuteur(e.target.value)} />
         </div>
         
       </div>
@@ -250,112 +193,53 @@ export default function NewBlog() {
             <hr className="w-full h-0.5 bg-slate-300 " />
         </div>
         <div className="w-full p-2 ">
-          <input className="w-full border-2 text-sm rounded-xl shadow-sm p-2" type="text" 
+          <textarea className="w-full border-2 text-sm rounded-xl shadow-sm text-primaryText p-2 min-h-[150px] max-h-[250px] border-primary bg-secondary"
+           type="text"
+           placeholder="Ecrivez votre description"
           onChange={(e) => setDescription(e.target.value)} />
         </div>
         
       </div>
 
-      <div id="NomRecette" className="w-full h-auto py-1 px-6">
-        
-        <h1>
-          Nombre de personnes
-        </h1>
-        <div className="w-full ">
-            <hr className="w-full h-0.5 bg-slate-300 " />
-        </div>
-        <div className="w-full p-2 flex gap-1">
-          <button className="w-1/4 bg-slate-300 border-2 text-sm  rounded-xl shadow-sm p-2"
-          onClick={() => removePersonne()}>
-            -
-          </button>
-          <div className="w-1/2 border-2 font-bold text-sm rounded-xl shadow-sm p-2 text-center">
-            {NbPersonnes}
-          </div>
-          <button className="w-1/4 bg-slate-400 border-2 text-sm rounded-xl shadow-sm p-2"
-          onClick={() => addPersonne()}>
-            +
-          </button>
-
-        </div>
-        
-      </div>
-
-
-      <div id="Ingredient" className="w-full h-auto py-1 px-6">
-        
-        <h1>
-          Ingrédients
-        </h1>
-        <div className="w-full ">
-            <hr className="w-full h-0.5 bg-slate-300 " />
-        </div>
-
-        {
-          Ingredients && Ingredients.map((ingredient, index) => (
-            <div key={index} className="w-full p-2 flex gap-1">
-              <div className="w-1/2 border-2 text-sm rounded-xl shadow-sm p-2">
-                {ingredient.name}
-              </div>
-              <div className="w-1/4 border-2 text-sm rounded-xl shadow-sm p-2">
-                {ingredient.quantite} 
-                <span className="pl-1"> {ingredient.unite}</span>
-              </div>
-              
-
-              <button className="w-1/4 bg-slate-300 border-2 text-sm  rounded-xl shadow-sm p-2"
-              onClick={() => setIngredients(Ingredients.filter((item, i) => i !== index))}>
-                -
-              </button>
-            </div>
-          ))
-
-        }
-
-
-        <div className="w-full p-2 ">
-          <button className="w-full bg-slate-300 border-2 text-sm  rounded-xl shadow-sm p-3"
-          onClick={() => setOpenIngredientModal(true)}>
-            Ajouter un ingrédient
-          </button>
-        </div>
 
         
-        
-      </div>
+  
 
       <div id="Etapes" className="w-full h-auto py-1 px-6 mb-10">
           <h1>
-            Etapes
+            Hashtags
           </h1>
-          <hr className="w-full h-0.5 bg-slate-300 " />
-          {
-            Etapes && Etapes.map((etape, index) => (
-              <div key={index} className="w-full p-2 flex gap-1">
-                <div className="w-1/6 border-2 text-sm flex justify-center items-center rounded-full shadow-sm p-2">
-                  {index+1}
-                </div>
-                <textarea className="w-2/3  border-2 text-sm rounded-xl shadow-sm p-2"
-                onChange={(e) => { Etapes[index] = e.target.value; setEtapes([...Etapes])}}
-                style={{resize: "none"}}
-                >
-
-
-                  {etape}
-                </textarea>
-                <button className="w-1/6 bg-slate-300 border-2 text-sm  rounded-xl shadow-sm p-2"
-                onClick={() => setEtapes(Etapes.filter((item, i) => i !== index))}>
-                  -
-                </button>
-              </div>
-            ))
-          }
+          <div className="w-full ">
+            <hr className="w-full h-0.5 bg-slate-300 " />
+        </div>
           <div className="w-full p-2 ">
-            <button className="w-full bg-slate-300 border-2 text-sm  rounded-xl shadow-sm p-3"
-            onClick={() => setEtapes([...Etapes, ""])}>
-              Ajouter une étape
-            </button>
-          </div>
+            <input className="w-full border-2 border-primary text-primaryText text-sm rounded-xl shadow-sm p-2 bg-secondary" type="text"
+            placeholder="Ajouter un ou plusieurs hastags"
+            onKeyDown={(e) => {
+              if(e.key === "Enter"){
+                setEtapes([...Etapes, e.target.value]);
+                e.target.value = "";
+              }
+
+            }
+            }
+             />
+
+          </div> 
+          {
+            Etapes.length > 0 ? (
+              <div className="w-full p-2 flex justify-start items-center">
+                {
+                  Etapes.map((etape, index) => (
+                    <button key={index} className="w-auto h-auto bg-secondary text-primaryText text-xs rounded-full p-2 m-1"
+                      onClick={() => setEtapes(Etapes.filter((item, i) => i !== index))}>
+                      {etape}
+                    </button>
+                  ))
+                }
+              </div>
+            ) : null
+          }
           
           
       </div>
@@ -364,16 +248,22 @@ export default function NewBlog() {
 
           {
             Image ? (
-              <img src={URL.createObjectURL(Image)} className="w-1/2 h-1/2 rounded-xl shadow-xl" />
+              <div className="relative w-full h-full flex justify-center justify-items-center items-center p-7">
+                <img src={URL.createObjectURL(Image)} className="w-full h-full rounded-xl shadow-xl" />
+                <button className="absolute top-0 right-0 w-8 h-8 border-2 border-primary text-primaryText bg-secondary rounded-full flex justify-center items-center justify-items-center"
+                  onClick={() => setImage(null)}>
+                  X
+                </button>
+              </div>
             ) : <>
-              <label htmlFor="fileupload" className="w-2/3 h-auto p-4 rounded-xl border-gray-900 border-2   text-white flex justify-center justify-items-center items-center">
-                <div className="w-1/2 h-full text-black flex justify-center justify-items-center items-center text-center">
+              <label htmlFor="fileupload" className="w-2/3 h-auto p-4 rounded-2xl border-primaryText border-2 flex justify-center justify-items-center items-center">
+                <div className="w-1/2 h-full text-primary flex justify-center justify-items-center items-center text-center">
                   Selectionner une image
                 </div>
               </label>
               <input id="fileupload" type="file" accept="image/*" capture="camera"
-                onChange={(e) => setImage(e.target.files[0])}>
-              </input>
+                onChange={(e) => setImage(e.target.files[0])} placeholder="Ajouter une image" className="hidden" />
+                  
             </>
           }
           
