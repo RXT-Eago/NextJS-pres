@@ -60,7 +60,7 @@ export default function Home({ recipe }) {
                         <h1 className="text-2xl">Article non trouvé</h1>
                     </div>
                 ) : (
-                <div className="w-full h-[calc(100vh-132px)] bg-backrgound text-primaryText flex justify-center items-center">
+                <div className="w-full h-[calc(100vh-65px)] bg-backrgound text-primaryText flex justify-center items-center">
 
     
                     <div className="w-full h-auto">

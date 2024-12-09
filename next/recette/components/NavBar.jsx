@@ -9,9 +9,9 @@ export default function NavBar() {
     <>
     <div className="  h-16 flex w-full py-2 bg-backrgound ">
         <div className="flex justify-items-center items-center justify-center w-full ">
-            <h1 className="text-4xl text-primaryText font-bold">
+            <h2 className="text-4xl text-primaryText font-normal ">
                 SIA's Partners Blog
-            </h1>
+            </h2>
         </div>        
      
 

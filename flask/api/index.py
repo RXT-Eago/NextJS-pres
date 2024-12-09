@@ -38,8 +38,6 @@ def get_blogs():
         response = SupabaseClient.table('Blog').select('*').execute()
         blogs = response.data
 
-        logger.info(f"blogs: {blogs}")
-
         if len(blogs) == 0:
             return []
         

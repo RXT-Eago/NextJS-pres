@@ -7,7 +7,8 @@ body {
 }
 
 h1 {
-  color: #E0E0E0
+  color: #E0E0E0;
+  text-shadow: 0 0 1px #46DBC4, 0 0 5px #46DBC4, 0 0 7px #46DBC4, 0 0 8px #46DBC4, 0 0 5px #46DBC4, 0 0 10px #46DBC4, 0 0 10px #46DBC4;
 }
 
 /* width */
