@@ -82,7 +82,7 @@ for i in range(0, 10):
         {
             'name': random.choice(names),
             'description': random.choice(descriptions),
-            'image': url_to_data_url(random.choice(images)),
+            #'image': url_to_data_url(random.choice(images)),
             'hashtag': list(random.sample(hashtags, 2)),
             'auteur': random.choice(auteurs)
         }

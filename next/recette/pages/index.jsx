@@ -126,9 +126,11 @@ export default function Home({ recipes, debugMode }) {
 
             href={`/recette/${recipe.id}`} >
 
-            {
+            {/* {
               recipe.image && (
-                <img
+                <next_image
+                  width={300}
+                  height={300}
                   id={index}
                   className="absolute top-0 left-0 w-full h-full object-cover grayscale opacity-5 rounded-lg hover:scale-150 transition-transform duration-500"
                   src={recipe.image}
@@ -136,7 +138,7 @@ export default function Home({ recipes, debugMode }) {
                 />
               )
               
-            }
+            } */}
           
 
             <div className="h-full w-full py-3 px-5 md:px-3 text-primaryText">
@@ -201,20 +203,15 @@ export default function Home({ recipes, debugMode }) {
 
 export async function getServerSideProps() {
 
-  let URL = "http://back-end:5000/blogs";
+  //let URL = "http://back-end:5000/blogs";
+  let URL = "http://localhost:5000/blogs";
+
   console.log(process.env.DEBUG_MODE);
   if (process.env.DEBUG_MODE === 'false') {
     URL = "https://production-url-unavailable";
   }
-  console.log(URL);
   const res = await fetch(URL);
   const recipes = await res.json();
-
-  recipes.forEach((recipe, index) => {
-    
-    recipe.image = `data:image/jpeg;base64,${recipe.image}`;
-  }
-  )
 
 
   return {

@@ -16,34 +16,6 @@ import { useRouter } from 'next/router'
 
 export default function Home({ recipe }) {
 
-    const[fixedRecipe, setFixedRecipe] = useState();
-    const [NbPersonnes, setNbPersonnes] = useState(0);
-    const [adjustedIngredients, setAdjustedIngredients] = useState([]);
-
-
-    function addPersonne() {
-        setNbPersonnes(NbPersonnes + 1);
-    }
-
-    function removePersonne() {
-        if (NbPersonnes > 1) {
-            setNbPersonnes(NbPersonnes - 1);
-        }
-    }
-
-
-
-    useEffect(() => {
-
-       
-
-    }, [recipe]);
-
-    useEffect(() => {
-      
-      }, [NbPersonnes , fixedRecipe]);
-
-
 
 
 
@@ -95,13 +67,66 @@ export default function Home({ recipe }) {
     )
 }
 
+
+// export async function generateStaticPaths() {
+
+//     //let URL = "http://back-end:5000/blog";
+//     let URL = "http://localhost:5000/blog";
+
+//     const res = await fetch(URL);
+//     const recipes = await res.json();
+
+//     const paths = recipes.map((recipe) => ({
+//         params: { id: recipe.id.toString() },
+//     }))
+
+//     console.log("generateStaticPaths: ", paths);
+//     return {
+//         paths,
+//         fallback: true
+//     }
+// }
+
+// export async function getServerSideProps({ params }) {
+    
+//     const id = params.id
+//     console.log("server side props id: ", params);
+
+//     // let URL = "http://back-end:5000/blog?id=" + id;
+//     let URL = "http://localhost:5000/blog?id=" + id;
+
+//     if (process.env.DEBUG_MODE === 'false') {
+//         URL = "https://production-url-unavailable" + id;
+//     }
+
+//     const res = await fetch(URL);
+//     const recipe = await res.json();
+    
+//     return {
+//         props: {
+//             recipe
+//         }
+//     }
+
+// }
+
+
 export async function getStaticPaths() {
+    
+    let URL = "http://localhost:5000/blogs";
+
+    const res = await fetch(URL);
+    const recipes = await res.json();
+
+    const paths = recipes.map((recipe) => ({
+        params: { id: recipe.id.toString() },
+    }))
+
+    console.log("getStaticPaths: ", paths);
     return {
-        paths: [
-            { params: { id: '1' } }, // See the "paths" section below
-        ],
-        fallback: true // See the "fallback" section below
-    };
+        paths,
+        fallback: true
+    }
 }
 
 export async function getStaticProps({ params }) {
@@ -109,7 +134,8 @@ export async function getStaticProps({ params }) {
     const id = params.id
     console.log(id);
 
-    let URL = "http://back-end:5000/blog?id=" + id;
+    // let URL = "http://back-end:5000/blog?id=" + id;
+    let URL = "http://localhost:5000/blog?id=" + id;
 
     if (process.env.DEBUG_MODE === 'false') {
         URL = "https://production-url-unavailable" + id;
@@ -117,11 +143,7 @@ export async function getStaticProps({ params }) {
 
     const res = await fetch(URL);
     const recipe = await res.json();
-    console.log(recipe);
-    
-
-
-    recipe.image = `data:image/jpeg;base64,${recipe.image}`;
+   
 
     return {
         props: {

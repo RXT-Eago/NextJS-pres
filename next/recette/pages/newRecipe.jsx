@@ -99,7 +99,8 @@ export default function NewBlog() {
         "auteur" : Auteur,
         "description" : Description,
         "hashtags" : Etapes,
-        "image" : dataUrl.split(",")[1]
+        "image" : ""
+        //"image" : dataUrl.split(",")[1]
         
       }
       
@@ -152,7 +153,7 @@ export default function NewBlog() {
       <div id="NomRecette" className="w-full h-auto py-1 px-6">
         
         <h1>
-          Nom de l'article
+          Nom de l&apos;article
         </h1>
         <div className="w-full ">
             <hr className="w-full h-0.5 bg-slate-300 " />
@@ -249,7 +250,7 @@ export default function NewBlog() {
           {
             Image ? (
               <div className="relative w-full h-full flex justify-center justify-items-center items-center p-7">
-                <img src={URL.createObjectURL(Image)} className="w-full h-full rounded-xl shadow-xl" />
+                <Image src={URL.createObjectURL(Image)} className="w-full h-full rounded-xl shadow-xl" alt="" />
                 <button className="absolute top-0 right-0 w-8 h-8 border-2 border-primary text-primaryText bg-secondary rounded-full flex justify-center items-center justify-items-center"
                   onClick={() => setImage(null)}>
                   X

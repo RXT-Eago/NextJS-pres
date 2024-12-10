@@ -1,5 +1,4 @@
 import Head from "next/head";
-import Image from "next/image";
 import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
 
@@ -10,7 +9,7 @@ export default function NavBar() {
     <div className="  h-16 flex w-full py-2 bg-backrgound ">
         <div className="flex justify-items-center items-center justify-center w-full ">
             <h2 className="text-4xl text-primaryText font-normal ">
-                SIA's Partners Blog
+                SIA&apos;s Partners Blog
             </h2>
         </div>        
      

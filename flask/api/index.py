@@ -15,8 +15,6 @@ ANON_KEY = os.environ.get('ANON_KEY')
 DATABASE_URL = os.environ.get('DATABASE_URL')
 
 
-#URL = "https://api-recette-zouzou.vercel.app/"
-
 @app.route('/')
 def home():
     logger = current_app.logger
@@ -84,16 +82,6 @@ def addRecipe():
         
         dictionnary = request.data
 
-        """
-        {
-            "name": "Les meilleurs KPI",
-            "description": "Long text de plus de 1000 caractères",
-            "image": "https://www.google.com",
-            "hastags": ["#poulet", "#champignons"],
-            "auteur": "Zouzou",
-            ]
-        }
-        """
 
         json_object = json.loads(dictionnary)
 
@@ -104,7 +92,7 @@ def addRecipe():
             SupabaseClient = create_client(DATABASE_URL, ANON_KEY)       
         
             response = SupabaseClient.table('Blog').insert(
-                {'name': json_object['name'], 'description': json_object['description'], 'image': json_object['image'], 'hashtag': json_object['hashtags'], 'auteur': json_object['auteur']}
+                {'name': json_object['name'], 'description': json_object['description'], 'hashtag': json_object['hashtags'], 'auteur': json_object['auteur']}
             ).execute()
             response = response.data
             blog_id = response[0]['id']
