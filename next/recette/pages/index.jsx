@@ -85,7 +85,7 @@ export default function Home({ recipes, debugMode }) {
     console.log("debug mode is ", debugMode);
     const url = debugMode
       ? "http://localhost:5000/deleteBlog"
-      : "https://production-url-unavailable";
+      : "https://next-js-pres.vercel.app/";
 
     fetch(url + `?id=${id}`, {
       method: 'GET', // or 'PUT'
@@ -208,7 +208,7 @@ export async function getServerSideProps() {
 
   console.log(process.env.DEBUG_MODE);
   if (process.env.DEBUG_MODE === 'false') {
-    URL = "https://production-url-unavailable";
+    URL = "https://next-js-pres.vercel.app/";
   }
   const res = await fetch(URL);
   const recipes = await res.json();

@@ -115,7 +115,7 @@ export async function getStaticPaths() {
 
     console.log("Hello from getStaticPaths");
     
-    let URL = "http://localhost:5000/blogs";
+    let URL = "https://next-js-pres.vercel.app/blogs";
 
     const res = await fetch(URL);
     const recipes = await res.json();
@@ -140,7 +140,7 @@ export async function getStaticProps({ params }) {
     let URL = "http://localhost:5000/blog?id=" + id;
 
     if (process.env.DEBUG_MODE === 'false') {
-        URL = "https://production-url-unavailable" + id;
+        URL = "https://next-js-pres.vercel.app/" + id;
     }
 
     const res = await fetch(URL);

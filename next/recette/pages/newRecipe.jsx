@@ -59,7 +59,7 @@ export default function NewBlog() {
 
     setIsWaiting(true);
 
-    const url = "http://localhost:5000/addBlog"
+    const url = "http://https://next-js-pres.vercel.app/addBlog"
 
 
     console.log(url);
