@@ -112,6 +112,8 @@ export default function Home({ recipe }) {
 
 
 export async function getStaticPaths() {
+
+    console.log("Hello from getStaticPaths");
     
     let URL = "http://localhost:5000/blogs";
 
