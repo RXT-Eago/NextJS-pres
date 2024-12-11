@@ -136,12 +136,9 @@ export async function getStaticProps({ params }) {
     const id = params.id
     console.log(id);
 
-    // let URL = "http://back-end:5000/blog?id=" + id;
-    let URL = "http://localhost:5000/blog?id=" + id;
-
-    if (process.env.DEBUG_MODE === 'false') {
-        URL = "https://next-js-pres.vercel.app/" + id;
-    }
+    
+    let  URL = "https://next-js-pres.vercel.app/blog?id=" + id;
+    
 
     const res = await fetch(URL);
     const recipe = await res.json();

@@ -83,9 +83,8 @@ export default function Home({ recipes, debugMode }) {
 
   function handleDelete(id) {
     console.log("debug mode is ", debugMode);
-    const url = debugMode
-      ? "http://localhost:5000/deleteBlog"
-      : "https://next-js-pres.vercel.app/";
+
+    let url =  "https://next-js-pres.vercel.app/deleteBlog";
 
     fetch(url + `?id=${id}`, {
       method: 'GET', // or 'PUT'
@@ -204,12 +203,9 @@ export default function Home({ recipes, debugMode }) {
 export async function getServerSideProps() {
 
   //let URL = "http://back-end:5000/blogs";
-  let URL = "http://localhost:5000/blogs";
 
-  console.log(process.env.DEBUG_MODE);
-  if (process.env.DEBUG_MODE === 'false') {
-    URL = "https://next-js-pres.vercel.app/";
-  }
+  let  URL = "https://next-js-pres.vercel.app/blogs";
+  
   const res = await fetch(URL);
   const recipes = await res.json();
 
