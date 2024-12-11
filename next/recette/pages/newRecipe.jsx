@@ -245,31 +245,7 @@ export default function NewBlog() {
           
       </div>
 
-        <div id="Image" className="w-full h-auto mb-5 py-1 px-6 flex justify-center justify-items-center items-center">
-
-          {
-            Image ? (
-              <div className="relative w-full h-full flex justify-center justify-items-center items-center p-7">
-                <Image src={URL.createObjectURL(Image)} className="w-full h-full rounded-xl shadow-xl" alt="" />
-                <button className="absolute top-0 right-0 w-8 h-8 border-2 border-primary text-primaryText bg-secondary rounded-full flex justify-center items-center justify-items-center"
-                  onClick={() => setImage(null)}>
-                  X
-                </button>
-              </div>
-            ) : <>
-              <label htmlFor="fileupload" className="w-2/3 h-auto p-4 rounded-2xl border-primaryText border-2 flex justify-center justify-items-center items-center">
-                <div className="w-1/2 h-full text-primary flex justify-center justify-items-center items-center text-center">
-                  Selectionner une image
-                </div>
-              </label>
-              <input id="fileupload" type="file" accept="image/*" capture="camera"
-                onChange={(e) => setImage(e.target.files[0])} placeholder="Ajouter une image" className="hidden" />
-                  
-            </>
-          }
-          
-
-        </div>
+       
       
       </div>
       
